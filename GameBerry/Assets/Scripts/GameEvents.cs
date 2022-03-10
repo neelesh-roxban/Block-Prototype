@@ -10,6 +10,7 @@ public class GameEvents : MonoBehaviour
     public static Action RequestNewShapes;
     public static Action SetShapeInActive;
     public static Action<int> AddScore; 
+    public static Action<bool> GameOver; 
    
 
 
