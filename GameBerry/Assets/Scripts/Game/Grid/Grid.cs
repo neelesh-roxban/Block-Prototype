@@ -212,6 +212,8 @@ public class Grid : MonoBehaviour
         {
             //Animations
         }
+        var totalScore =  10 * completedLines;
+        GameEvents.AddScore(totalScore);
 
     }
 

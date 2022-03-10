@@ -9,6 +9,7 @@ public class GameEvents : MonoBehaviour
     public static Action MoveShapeToStartPosition;
     public static Action RequestNewShapes;
     public static Action SetShapeInActive;
+    public static Action<int> AddScore; 
    
 
 
