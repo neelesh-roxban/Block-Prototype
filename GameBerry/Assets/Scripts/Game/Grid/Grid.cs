@@ -94,6 +94,7 @@ public class Grid : MonoBehaviour
 
             square.GetComponent<RectTransform>().anchoredPosition = new Vector2(startPosition.x+pos_x_offset, startPosition.y-pos_y_offset);
             square.GetComponent<RectTransform>().localPosition= new Vector3(startPosition.x+pos_x_offset, startPosition.y-pos_y_offset,0.0f);
+            coloumn_Number++;
         }
 
     }
