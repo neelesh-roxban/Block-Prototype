@@ -1,22 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Shape : MonoBehaviour
+public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
 //Block = ShapeDate
     public GameObject squareShapeImage;     
+    public Vector3 shapeSelectedScale;
+    public Vector2 offset = new Vector2(0f,700f);
+
+
     [HideInInspector]
     public Block currentShapeData;
-    private List<GameObject> _currentShape = new List<GameObject>();
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-       // RequestNewShape(currentShapeData);
-        
-    }
 
+    private List<GameObject> _currentShape = new List<GameObject>();
+    private Vector3 _shapeStartScale;
+    private RectTransform _transform;
+    private bool _shapeDragable = true;
+    private Canvas _canvas;
+
+    public void Awake()
+    {
+        _shapeStartScale = this.GetComponent<RectTransform>().localScale;
+        _transform = this.GetComponent<RectTransform>();
+        _canvas=GetComponentInParent<Canvas>();
+        _shapeDragable= true;
+
+    }
+   
+    
     public void RequestNewShape(Block block)
     {
         CreateBlock(block);
@@ -110,5 +123,48 @@ public class Shape : MonoBehaviour
          return number;
     }
 
+    
+    public  void OnPointerClick(PointerEventData eventData)
+    {
+
+    
+    }
+    public   void OnPointerUp(PointerEventData eventData)
+    {
+
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        this.GetComponent<RectTransform>().localScale=shapeSelectedScale;
+
+    }
+    public  void OnDrag(PointerEventData eventData)
+    {
+        _transform.anchorMin= new Vector2(0,0);
+        _transform.anchorMax = new Vector2(0,0);
+        _transform.pivot = new Vector2(0,0);
+
+        Vector2 popsition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas.transform as RectTransform, eventData.position, Camera.main, out popsition);
+        _transform.localPosition = popsition + offset;
+
+    }
+    public  void OnEndDrag(PointerEventData eventData)
+    {
+         this.GetComponent<RectTransform>().localScale = _shapeStartScale;
+    }
+
+    public  void OnPointerDown(PointerEventData eventData)
+    {
+
+    }
+
+
+
+
+   
+
+
   
+
 }
