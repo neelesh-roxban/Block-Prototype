@@ -6,14 +6,15 @@ public class Shape : MonoBehaviour
 {
 //Block = ShapeDate
     public GameObject squareShapeImage;     
-    //[HideInInspector]
+    [HideInInspector]
     public Block currentShapeData;
     private List<GameObject> _currentShape = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        RequestNewShape(currentShapeData);
-        //
+      
+       // RequestNewShape(currentShapeData);
+        
     }
 
     public void RequestNewShape(Block block)
