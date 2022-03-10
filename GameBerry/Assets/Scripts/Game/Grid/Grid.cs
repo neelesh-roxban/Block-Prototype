@@ -18,11 +18,13 @@ public class Grid : MonoBehaviour
 
     private Vector2 _offset = new Vector2(0.0f, 0.0f);
     private List<GameObject> _gridSquares = new List<GameObject>();
+    private LineIndicater _lineIndicater;
 
 
     void Start()
     {
         createGrid();
+        _lineIndicater = GetComponent<LineIndicater>();
     }
 
     private void OnEnable()
@@ -56,7 +58,8 @@ public class Grid : MonoBehaviour
                  _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().SquareIndex = square_Index;
                  _gridSquares[_gridSquares.Count-1].transform.SetParent(this.transform);
                  _gridSquares[_gridSquares.Count-1].transform.localScale = new Vector3(squareScale,squareScale,squareScale);
-                 _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().SetImage(square_Index % 2==0);
+                 Debug.Log(_lineIndicater.GetGridSquareIndex(square_Index));
+                 _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().SetImage(_lineIndicater.GetGridSquareIndex(square_Index) % 2==0);
                  square_Index++;
              }         
 

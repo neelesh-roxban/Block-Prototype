@@ -47,7 +47,7 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IBe
     private void OnDisable()
     {
           GameEvents.MoveShapeToStartPosition -=MoveShapeToStartPosition;
-           GameEvents.SetShapeInActive -=setShapeInActive;
+          GameEvents.SetShapeInActive -=setShapeInActive;
     }
 
     public bool isAnyOfShapeSquareActive()
@@ -143,9 +143,6 @@ public class Shape : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IBe
         }
     }
 
-
-
-   
     private float GetYPositionForShapeSquare(Block shapeData, int row, Vector2 moveDistance)
     {
         float shiftOnY = 0f;
