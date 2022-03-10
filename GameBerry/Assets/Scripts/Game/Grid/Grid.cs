@@ -198,7 +198,7 @@ public class Grid : MonoBehaviour
         for (int row=0; row<10; row++)
         {
             List<int> data = new List<int>(10);
-            for (var index =0; index<9; index++)
+            for (var index =0; index<10; index++)
             {
                 data.Add(_lineIndicater.lineData[row,index]);
             }
