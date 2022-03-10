@@ -46,7 +46,7 @@ public class Shape : MonoBehaviour
                if( block.board[row].coloumn[coloumn])
                {
                    _currentShape[currentIndexInList].SetActive(true);
-                   _currentShape[currentIndexInList].GetComponent<RectTransform>().localPosition= new Vector2(getXPositionFroShapeSquare(block,coloumn,moveDistance), getYPositionForShapeSquare(block, row, moveDistance));
+                   _currentShape[currentIndexInList].GetComponent<RectTransform>().localPosition= new Vector2(GetXPositionForShapeSquare(block,coloumn,moveDistance),  GetYPositionForShapeSquare(block, row, moveDistance));
                    currentIndexInList++;
                }
             }
@@ -55,125 +55,37 @@ public class Shape : MonoBehaviour
 
 
 
-    private float getYPositionForShapeSquare(Block block, int row, Vector2 moveDistance)
+   
+    private float GetYPositionForShapeSquare(Block shapeData, int row, Vector2 moveDistance)
     {
         float shiftOnY = 0f;
-        if(block.rows>1)
+        if (shapeData.rows > 1)
         {
-            if(block.rows % 2  !=0)
-            {
-                var middleSquareIndex= (block.rows-1)/2 ;
-                var multiplier = (block.rows-1)/2;
-                if(row<middleSquareIndex)
-                {
-                    shiftOnY = moveDistance.y*-1;
-                    shiftOnY*= multiplier;
-                }
-                else if(row > middleSquareIndex)
-                {
-                    shiftOnY = moveDistance.y* 1;
-                    shiftOnY*= multiplier;
-                }
-            }
-
+            float startYPos;
+            if (shapeData.rows % 2 != 0)
+                startYPos = (shapeData.rows / 2) * moveDistance.y;
             else
-            {
-                var middleSquareIndex2 = (block.rows ==2) ? 1 : (block.rows/2);
-                var middleSquareIndex1 = (block.rows ==2) ? 0 : (block.rows-1);
-                var multiplier = block.rows/2;
-
-                if( row== middleSquareIndex1|| row == middleSquareIndex2)
-                {
-                    if(row==middleSquareIndex2)
-                    {
-                         shiftOnY = (moveDistance.y/2)*-1;
-                    }
-
-                    if(row==middleSquareIndex1)
-                    {
-                        shiftOnY = (moveDistance.y/2);
-                    }
-                }
-
-                 if(row<middleSquareIndex1 && row < middleSquareIndex2)
-                {
-                    shiftOnY = moveDistance.y * 1;
-                    shiftOnY *= multiplier;
-                }
-                else
-                if( row > middleSquareIndex1 && row > middleSquareIndex2)
-                {
-                    shiftOnY = moveDistance.y * -1;
-                    shiftOnY *= multiplier;
-                }
-
-                
-            }
+                startYPos = ((shapeData.rows / 2) - 1) * moveDistance.y + moveDistance.y / 2;
+            shiftOnY = startYPos - row * moveDistance.y;
         }
-
         return shiftOnY;
     }
 
 
-    private float getXPositionFroShapeSquare(Block block, int coloumn, Vector2 moveDistance)
+   private float GetXPositionForShapeSquare(Block shapeData, int column, Vector2 moveDistance)
     {
-        float shiftOnX= 0f;
-
-        if(block.coloumns>1)
+        float shiftOnX = 0f;
+        if (shapeData.coloumns > 1)
         {
-            if(block.coloumns % 2  !=0)
-            {
-                var middleSquareIndex= (block.coloumns-1)/2 ;
-                var multiplier = (block.coloumns-1)/2;
-                if(coloumn<middleSquareIndex)
-                {
-                    shiftOnX = moveDistance.x*-1;
-                    shiftOnX*= multiplier;
-                }
-                else if(coloumn > middleSquareIndex)
-                {
-                    shiftOnX = moveDistance.x* 1;
-                    shiftOnX*= multiplier;
-                }
-            }
-
+            float startXPos;
+            if (shapeData.coloumns % 2 != 0)
+                startXPos = (shapeData.coloumns / 2) * moveDistance.x * -1;
             else
-            {
-                var middleSquareIndex2 = (block.coloumns ==2) ? 1 : (block.coloumns/2);
-                var middleSquareIndex1 = (block.coloumns ==2) ? 0 : (block.coloumns-1);
-                var multiplier = block.coloumns/2;
+                startXPos = ((shapeData.coloumns / 2) - 1) * moveDistance.x * -1 - moveDistance.x / 2;
+            shiftOnX = startXPos + column * moveDistance.x;
 
-                if( coloumn== middleSquareIndex1|| coloumn == middleSquareIndex2)
-                {
-                    if(coloumn==middleSquareIndex2)
-                    {
-                        shiftOnX = moveDistance.x/2;
-                    }
-
-                    if(coloumn==middleSquareIndex1)
-                    {
-                        shiftOnX = (moveDistance.x/2)*-1;
-                    }
-                }
-
-                if(coloumn<middleSquareIndex1 && coloumn < middleSquareIndex2)
-                {
-                    shiftOnX = moveDistance.x * -1;
-                    shiftOnX *= multiplier;
-                }
-                else
-                {
-                    shiftOnX = moveDistance.x * 1;
-                    shiftOnX *= multiplier;
-                }
-
-            }
         }
-
         return shiftOnX;
-        
-
-
     }
 
     private int getNumberOfSquares(Block block)
