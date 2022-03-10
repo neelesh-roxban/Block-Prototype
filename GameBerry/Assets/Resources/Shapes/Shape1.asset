@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8156ab38692c8f8488ffc5f0388c56e4, type: 3}
-  m_Name: New Block
+  m_Name: Shape1
   m_EditorClassIdentifier: 
-  coloumns: 0
-  rows: 0
-  board: []
+  coloumns: 2
+  rows: 3
+  board:
+  - coloumn: 0100
+  - coloumn: 0100
+  - coloumn: 0101

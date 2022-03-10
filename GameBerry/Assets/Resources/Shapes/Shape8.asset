@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8156ab38692c8f8488ffc5f0388c56e4, type: 3}
   m_Name: Shape8
   m_EditorClassIdentifier: 
-  coloumns: 0
-  rows: 0
-  board: []
+  coloumns: 2
+  rows: 2
+  board:
+  - coloumn: 0101
+  - coloumn: 0101
