@@ -141,7 +141,32 @@ public class Grid : MonoBehaviour
               {
                   _gridSquares[squrIndexe].GetComponent<GridSquare>().placeShapeOnBoard();                  
               }
-               currentSelectedShape.DeActivateShape();
+
+              var shapeLeft =0;
+
+              foreach (var shape in shapeStorage.shapeList)
+              {
+                  if(shape.isOnStartPos() && shape.isAnyOfShapeSquareActive() )
+                  {
+                      shapeLeft++;
+                  }
+                  
+              }
+             // currentSelectedShape.DeActivateShape();
+
+              if(shapeLeft == 0)
+              {
+                  GameEvents.RequestNewShapes();
+
+              }
+
+              else
+              {
+                  GameEvents.SetShapeInActive();
+              }
+
+            
+              
           }
 
           else // Cannot Place Block on the board

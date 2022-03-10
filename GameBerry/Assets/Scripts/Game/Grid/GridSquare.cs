@@ -57,15 +57,26 @@ public class GridSquare : MonoBehaviour
            Selected=true;
            hoverImage.gameObject.SetActive(true); 
         }
+
+        else
+        if(collision.GetComponent<ShapeSquare>()!=null)
+        {
+            collision.GetComponent<ShapeSquare>().SetOcupide();
+        }
         
     }
       public void OnTriggerStay2D(Collider2D collision)
     {
          Selected=true;
-       if(SquareOccupied == false)
+        if(SquareOccupied == false)
         {
           
            hoverImage.gameObject.SetActive(true); 
+        }
+        else
+        if(collision.GetComponent<ShapeSquare>()!=null)
+        {
+            collision.GetComponent<ShapeSquare>().SetOcupide();
         }
 
     }
@@ -75,6 +86,11 @@ public class GridSquare : MonoBehaviour
         {
            Selected = false;
            hoverImage.gameObject.SetActive(false); 
+        }
+        else
+        if(collision.GetComponent<ShapeSquare>()!=null)
+        {
+            collision.GetComponent<ShapeSquare>().UnSetOcupdied();
         }
         
     }

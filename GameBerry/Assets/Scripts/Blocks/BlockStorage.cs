@@ -20,6 +20,16 @@ public class BlockStorage : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        GameEvents.RequestNewShapes+=RequestNewShapes;
+
+    }
+    private void OnDisable()
+    {
+        GameEvents.RequestNewShapes-=RequestNewShapes;
+    }
+
     public Shape GetCurrentSelectedShape()
     {
         foreach (var shape in shapeList)
@@ -34,6 +44,16 @@ public class BlockStorage : MonoBehaviour
         }
          Debug.LogError("No Block is selected");
          return null;
+    }
+
+    private void RequestNewShapes()
+    {
+        foreach (var shape in shapeList)
+        {
+            var shapeIndex = UnityEngine.Random.Range(0,block.Count);
+            shape.RequestNewShape(block[shapeIndex]);
+            
+        }
     } 
 
   
