@@ -13,6 +13,7 @@ public class Shape : MonoBehaviour
     void Start()
     {
         RequestNewShape(currentShapeData);
+        //
     }
 
     public void RequestNewShape(Block block)
