@@ -13,6 +13,7 @@ public class GridSquare : MonoBehaviour
     public int SquareIndex{get; set;}
     public bool SquareOccupied {get; set;}
     
+    
     void Start()
     {
         Selected = false;
@@ -20,8 +21,22 @@ public class GridSquare : MonoBehaviour
         
     }
 
+//tempFunction
+     public bool CanWeUseSquare()
+     {
+         return hoverImage.gameObject.activeSelf;
+     }
+
+     public void ActivateSquare()
+     {
+         hoverImage.gameObject.SetActive(false);
+         activeImage.gameObject.SetActive(true);
+         Selected=true;
+         SquareOccupied=true;
+     }
+
    
-    public void setImage(bool setFirstImage)
+    public void SetImage(bool setFirstImage)
     {
         normalImage.GetComponent<Image>().sprite= setFirstImage? normalImages[1] : normalImages[0];
 

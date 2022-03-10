@@ -24,6 +24,17 @@ public class Grid : MonoBehaviour
         createGrid();
     }
 
+    private void OnEnable()
+    {
+        GameEvents.CheckIfShapeCanBePlaced +=CheckIfShapeCanBePlaced;
+
+    }
+    private void OnDisable()
+    {
+         GameEvents.CheckIfShapeCanBePlaced -=CheckIfShapeCanBePlaced;
+
+    }
+
     private void createGrid()
     {
        spawnGridSquares();
@@ -43,7 +54,7 @@ public class Grid : MonoBehaviour
                  _gridSquares.Add(Instantiate(gridsquare) as GameObject);
                  _gridSquares[_gridSquares.Count-1].transform.SetParent(this.transform);
                  _gridSquares[_gridSquares.Count-1].transform.localScale = new Vector3(squareScale,squareScale,squareScale);
-                 _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().setImage(square_Index % 2==0);
+                 _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().SetImage(square_Index % 2==0);
                  square_Index++;
              }         
 
@@ -97,6 +108,22 @@ public class Grid : MonoBehaviour
             coloumn_Number++;
         }
 
+    }
+
+    private void CheckIfShapeCanBePlaced()
+    {
+         foreach (var square in _gridSquares)
+         {
+             var gridSquare = square.GetComponent<GridSquare>();
+             
+             if(gridSquare.CanWeUseSquare() == true)
+             {
+                 gridSquare.ActivateSquare();
+             }
+
+             
+             
+         }
     }
    
 }
