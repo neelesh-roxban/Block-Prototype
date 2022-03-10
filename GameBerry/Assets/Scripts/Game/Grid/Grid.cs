@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+    public BlockStorage shapeStorage;
 
     public int coloumns = 0;
     public int rows = 0;
@@ -52,6 +53,7 @@ public class Grid : MonoBehaviour
              for(var coloumn=0; coloumn<coloumns; ++coloumn)
              {
                  _gridSquares.Add(Instantiate(gridsquare) as GameObject);
+                 _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().SquareIndex = square_Index;
                  _gridSquares[_gridSquares.Count-1].transform.SetParent(this.transform);
                  _gridSquares[_gridSquares.Count-1].transform.localScale = new Vector3(squareScale,squareScale,squareScale);
                  _gridSquares[_gridSquares.Count-1].GetComponent<GridSquare>().SetImage(square_Index % 2==0);
@@ -112,18 +114,43 @@ public class Grid : MonoBehaviour
 
     private void CheckIfShapeCanBePlaced()
     {
+        var squreIndexes = new List<int>();
          foreach (var square in _gridSquares)
          {
              var gridSquare = square.GetComponent<GridSquare>();
              
-             if(gridSquare.CanWeUseSquare() == true)
+             if(gridSquare.Selected && !gridSquare.SquareOccupied)
              {
-                 gridSquare.ActivateSquare();
+                 squreIndexes.Add(gridSquare.SquareIndex);
+                 gridSquare.Selected=false;
+
+
+                 //gridSquare.ActivateSquare();
              }
 
-             
-             
          }
+          var currentSelectedShape = shapeStorage.GetCurrentSelectedShape();
+          if(currentSelectedShape == null)
+          {
+              return;
+          }
+
+          if(currentSelectedShape.totalSquareNumber == squreIndexes.Count)
+          {
+              foreach (var squrIndexe in squreIndexes)
+              {
+                  _gridSquares[squrIndexe].GetComponent<GridSquare>().placeShapeOnBoard();                  
+              }
+               currentSelectedShape.DeActivateShape();
+          }
+
+          else // Cannot Place Block on the board
+          {
+              GameEvents.MoveShapeToStartPosition();
+
+          }
+
+         
     }
    
 }

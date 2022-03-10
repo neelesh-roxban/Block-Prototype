@@ -20,5 +20,21 @@ public class BlockStorage : MonoBehaviour
         
     }
 
+    public Shape GetCurrentSelectedShape()
+    {
+        foreach (var shape in shapeList)
+        {
+            if(shape.isOnStartPos()==false && shape.isAnyOfShapeSquareActive())
+            {
+                return shape;
+            }
+
+           
+            
+        }
+         Debug.LogError("No Block is selected");
+         return null;
+    } 
+
   
 }
