@@ -636,7 +636,7 @@ MonoBehaviour:
   rows: 10
   squaresGap: 0
   gridsquare: {fileID: 2732265433262831242, guid: 9eabdba5d2d82e7408443907844927f5, type: 3}
-  startPosition: {x: -425, y: 480}
+  startPosition: {x: -425, y: 435}
   squareScale: 0.8
   everysquareOfset: 1
 --- !u!114 &521249512
@@ -2134,7 +2134,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 99be3b648135b9e41a5e19bd428d3e3c, type: 2}
     - target: {fileID: 9069140958833649386, guid: fc08a6bc7c7c76c4f9775294bb4c450a, type: 3}
       propertyPath: offset.y
-      value: 700
+      value: 850
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc08a6bc7c7c76c4f9775294bb4c450a, type: 3}
